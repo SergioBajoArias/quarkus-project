@@ -17,4 +17,12 @@ class HelloResourceTest {
              .body(is("Hello from RESTEasy Reactive"));
     }
 
+    @Test
+    void testPoliteHelloEndpoint() {
+        given()
+                .when().get("/hello/polite/Sergio")
+                .then()
+                .statusCode(200)
+                .body(is("Good morning Sergio"));
+    }
 }

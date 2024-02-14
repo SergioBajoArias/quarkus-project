@@ -1,7 +1,6 @@
 package com.xeridia.resource;
 
 import com.xeridia.service.HelloService;
-import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
@@ -11,8 +10,11 @@ import jakarta.ws.rs.core.MediaType;
 @Path("/hello")
 public class HelloResource {
 
-    @Inject
     HelloService helloService;
+
+    public HelloResource(HelloService helloService) {
+        this.helloService = helloService;
+    }
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)
