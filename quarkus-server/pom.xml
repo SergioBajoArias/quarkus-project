@@ -62,10 +62,6 @@
             <artifactId>jmh-generator-annprocess</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.xeridia</groupId>
-            <artifactId>quarkus-model</artifactId>
-        </dependency>
-        <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-junit5</artifactId>
             <scope>test</scope>

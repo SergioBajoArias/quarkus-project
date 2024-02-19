@@ -1,14 +1,14 @@
 services:
   quarkus:
-    image: dockerfile-native:latest
+    image: dockerfile-nr-native-micro:latest
     environment:
       quarkus.datasource.db-kind: mysql
       quarkus.datasource.username: user
       quarkus.datasource.password: password
-      quarkus.datasource.reactive.url: mysql://mysql:3306/db
-      quarkus.datasource.reactive.max-size: 20
+      quarkus.datasource.url: mysql://host.docker.internal:3306/db
+      quarkus.datasource.jdbc.max-size: 20
       quarkus.hibernate-orm.database.generation: drop-and-create
-      quarkus.log.level: INFO
+      quarkus.log.level: DEBUG
     ports:
       - '8080:8080'
     expose:

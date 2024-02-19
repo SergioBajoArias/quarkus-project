@@ -9,7 +9,7 @@
   <modules>
     <module>quarkus-server</module>
     <module>jmeter-sampler</module>
-    <module>quarkus-model</module>
+      <module>quarkus-server-nr</module>
   </modules>
   <properties>
     <compiler-plugin.version>3.12.1</compiler-plugin.version>
