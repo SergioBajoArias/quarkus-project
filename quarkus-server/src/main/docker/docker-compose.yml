@@ -1,6 +1,6 @@
 services:
   quarkus:
-    image: dockerfile-native:latest
+    image: dockerfile-native-micro:latest
     environment:
       quarkus.datasource.db-kind: mysql
       quarkus.datasource.username: user
@@ -16,6 +16,22 @@ services:
     depends_on:
       - mysql
 
+  keycloak:
+    image: quay.io/keycloak/keycloak:23.0
+    command: start-dev
+    environment:
+      KC_DB: mysql
+      KC_DB_URL_HOST: mysql
+      KC_DB_URL_DATABASE: keycloak_db
+      KC_DB_PASSWORD: password
+      KC_DB_USERNAME: user
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    ports:
+      - "8081:8080"
+    depends_on:
+      - mysql
+
   mysql:
     image: mysql:5.7
     restart: always
@@ -24,11 +40,13 @@ services:
       MYSQL_USER: 'user'
       MYSQL_PASSWORD: 'password'
       MYSQL_ROOT_PASSWORD: 'password'
+    command: --init-file /data/application/init.sql
     ports:
       - '3306:3306'
     expose:
       - '3306'
     volumes:
+      - ./init.sql:/data/application/init.sql
       - my-db:/var/lib/mysql
 volumes:
   my-db:
