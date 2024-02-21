@@ -19,7 +19,6 @@ import java.util.List;
 
 @Path("/api/admin/employees")
 @RequestScoped
-@Authenticated
 public class EmployeeResource {
 
     EmployeeService employeeService;
