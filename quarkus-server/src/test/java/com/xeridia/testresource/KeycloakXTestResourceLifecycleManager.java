@@ -11,6 +11,7 @@ import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.jboss.logging.Logger;
 import org.keycloak.representations.AccessTokenResponse;
 import org.keycloak.representations.idm.ClientRepresentation;
@@ -26,7 +27,8 @@ import io.restassured.RestAssured;
 import io.restassured.specification.RequestSpecification;
 
 public class KeycloakXTestResourceLifecycleManager implements QuarkusTestResourceLifecycleManager {
-    private static String KEYCLOAK_SERVER_URL = "http://localhost:8081";
+
+    private static String KEYCLOAK_SERVER_URL = "http://localhost:8082";
     private static final String KEYCLOAK_REALM = "quarkus";
     private static final String KEYCLOAK_SERVICE_CLIENT = "backend-service";
 

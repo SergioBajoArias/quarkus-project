@@ -2,10 +2,7 @@ package com.xeridia.resource;
 
 import com.xeridia.model.Employee;
 import com.xeridia.service.EmployeeService;
-import io.quarkus.security.Authenticated;
 import io.smallrye.mutiny.Uni;
-import jakarta.annotation.security.PermitAll;
-import jakarta.annotation.security.RolesAllowed;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;

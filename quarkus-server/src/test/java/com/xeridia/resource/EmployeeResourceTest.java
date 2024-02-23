@@ -1,26 +1,14 @@
 package com.xeridia.resource;
 
 import com.xeridia.model.Employee;
-import com.xeridia.repository.EmployeeRepository;
 import com.xeridia.testresource.KeycloakXTestResourceLifecycleManager;
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
-import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
-import jakarta.inject.Inject;
-import org.eclipse.microprofile.config.inject.ConfigProperty;
+import org.eclipse.microprofile.config.ConfigProvider;
 import org.junit.jupiter.api.Test;
-import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.Mode;
-import org.openjdk.jmh.infra.Blackhole;
-import org.openjdk.jmh.runner.Runner;
-import org.openjdk.jmh.runner.RunnerException;
-import org.openjdk.jmh.runner.options.Options;
-import org.openjdk.jmh.runner.options.OptionsBuilder;
-import org.openjdk.jmh.runner.options.TimeValue;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -29,14 +17,10 @@ import static org.hamcrest.CoreMatchers.equalTo;
 @QuarkusTestResource(KeycloakXTestResourceLifecycleManager.class)
 public class EmployeeResourceTest {
 
-    @ConfigProperty(name = "quarkus.test.admin.token")
-    String adminToken;
-
-    @ConfigProperty(name = "quarkus.test.user.token")
-    String aliceToken;
-
     @Test
     void testPersistEndpoint() {
+        String adminToken = ConfigProvider.getConfig().getValue("quarkus.test.admin.token", String.class);
+
         Employee employeeToPersist = Employee.builder()
                 .name("Sergio")
                 .age(41)
@@ -59,6 +43,8 @@ public class EmployeeResourceTest {
 
     @Test
     void testListAllEndpoint() {
+        String adminToken = ConfigProvider.getConfig().getValue("quarkus.test.admin.token", String.class);
+
         List<Employee> employees = given()
                 .auth().oauth2(adminToken)
                 .with()

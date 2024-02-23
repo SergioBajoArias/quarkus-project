@@ -2,7 +2,6 @@ package com.xeridia.nr.service;
 
 import com.xeridia.nr.model.Employee;
 import com.xeridia.nr.repository.EmployeeRepository;
-import io.smallrye.mutiny.Uni;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
