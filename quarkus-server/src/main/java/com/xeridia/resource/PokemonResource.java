@@ -2,6 +2,7 @@ package com.xeridia.resource;
 
 import com.xeridia.model.PokemonListResponse;
 import com.xeridia.model.PokemonResponse;
+import com.xeridia.service.CacheService;
 import com.xeridia.service.PokemonService;
 import io.smallrye.mutiny.Uni;
 import jakarta.enterprise.context.RequestScoped;
@@ -17,9 +18,11 @@ import org.eclipse.microprofile.rest.client.inject.RestClient;
 public class PokemonResource {
 
     PokemonService pokemonService;
+    CacheService cacheService;
 
-    public PokemonResource(@RestClient PokemonService pokemonService) {
+    public PokemonResource(@RestClient PokemonService pokemonService, CacheService cacheService) {
         this.pokemonService = pokemonService;
+        this.cacheService = cacheService;
     }
 
     @GET
@@ -32,6 +35,6 @@ public class PokemonResource {
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Uni<PokemonResponse> findById(@PathParam("id") Long id) {
-        return pokemonService.getPokemon(id);
+        return cacheService.getPokemon(id);
     }
 }

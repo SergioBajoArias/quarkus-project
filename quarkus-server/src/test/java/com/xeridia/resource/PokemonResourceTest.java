@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Test;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.nullValue;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.lessThan;
 
 @QuarkusTest
 @QuarkusTestResource(KeycloakXTestResourceLifecycleManager.class)
@@ -30,13 +32,15 @@ public class PokemonResourceTest {
             .assertThat()
                 .body("count", equalTo(1302))
                 .body("next", equalTo("https://pokeapi.co/api/v2/pokemon?offset=20&limit=20"))
-                .body("prev", nullValue());
+                .body("prev", nullValue())
+                .body("results[0].name", equalTo("bulbasaur"));
     }
 
     @Test
     void testFindByIdEndpoint() {
         String userToken = ConfigProvider.getConfig().getValue("quarkus.test.user.token", String.class);
 
+        // Non-cached request
         given()
             .auth().oauth2(userToken)
         .with()
@@ -45,6 +49,20 @@ public class PokemonResourceTest {
             .get("/api/users/pokemons/1")
         .then()
             .statusCode(200)
+            .time(greaterThan(2000L))
+            .assertThat()
+                .body("name", equalTo("bulbasaur"));
+
+        // Cached request
+        given()
+            .auth().oauth2(userToken)
+        .with()
+            .contentType(ContentType.JSON)
+        .when()
+            .get("/api/users/pokemons/1")
+        .then()
+            .statusCode(200)
+            .time(lessThan(2000L))
             .assertThat()
                 .body("name", equalTo("bulbasaur"));
     }
