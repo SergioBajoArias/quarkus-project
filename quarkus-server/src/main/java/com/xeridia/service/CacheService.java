@@ -2,6 +2,7 @@ package com.xeridia.service;
 
 import com.xeridia.model.PokemonResponse;
 import io.quarkus.cache.CacheResult;
+import io.smallrye.common.annotation.RunOnVirtualThread;
 import io.smallrye.mutiny.Uni;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.ws.rs.PathParam;

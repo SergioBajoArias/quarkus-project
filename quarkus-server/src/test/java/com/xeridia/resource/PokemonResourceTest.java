@@ -2,10 +2,14 @@ package com.xeridia.resource;
 
 import com.xeridia.testresource.KeycloakXTestResourceLifecycleManager;
 import io.quarkus.test.common.QuarkusTestResource;
+import io.quarkus.test.common.http.TestHTTPEndpoint;
+import io.quarkus.test.common.http.TestHTTPResource;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
 import org.eclipse.microprofile.config.ConfigProvider;
 import org.junit.jupiter.api.Test;
+
+import java.net.URL;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -15,7 +19,14 @@ import static org.hamcrest.Matchers.lessThan;
 
 @QuarkusTest
 @QuarkusTestResource(KeycloakXTestResourceLifecycleManager.class)
+@TestHTTPEndpoint(PokemonResource.class)
 public class PokemonResourceTest {
+
+    @TestHTTPResource("/api/users/pokemons")
+    URL pokemonsEndpoint;
+
+    @TestHTTPResource("/api/users/pokemons/1")
+    URL pokemonsDetailEndpoint;
 
     @Test
     void testListEndpoint() {
@@ -26,7 +37,7 @@ public class PokemonResourceTest {
         .with()
             .contentType(ContentType.JSON)
         .when()
-            .get("/api/users/pokemons")
+            .get(pokemonsEndpoint)
         .then()
             .statusCode(200)
             .assertThat()
@@ -46,10 +57,10 @@ public class PokemonResourceTest {
         .with()
             .contentType(ContentType.JSON)
         .when()
-            .get("/api/users/pokemons/1")
+            .get(pokemonsDetailEndpoint)
         .then()
             .statusCode(200)
-            .time(greaterThan(2000L))
+            .time(greaterThan(2000L))           // Takes longer than 2000 milliseconds
             .assertThat()
                 .body("name", equalTo("bulbasaur"));
 
@@ -59,10 +70,10 @@ public class PokemonResourceTest {
         .with()
             .contentType(ContentType.JSON)
         .when()
-            .get("/api/users/pokemons/1")
+            .get(pokemonsDetailEndpoint)
         .then()
             .statusCode(200)
-            .time(lessThan(2000L))
+            .time(lessThan(2000L))              // Takes fewer than 2000 milliseconds
             .assertThat()
                 .body("name", equalTo("bulbasaur"));
     }

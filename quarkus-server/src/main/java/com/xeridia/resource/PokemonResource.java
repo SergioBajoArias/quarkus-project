@@ -4,6 +4,7 @@ import com.xeridia.model.PokemonListResponse;
 import com.xeridia.model.PokemonResponse;
 import com.xeridia.service.CacheService;
 import com.xeridia.service.PokemonService;
+import io.smallrye.common.annotation.RunOnVirtualThread;
 import io.smallrye.mutiny.Uni;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.ws.rs.GET;
