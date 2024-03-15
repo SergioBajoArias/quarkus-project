@@ -7,7 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 @ApplicationScoped
 @Slf4j
 public class ScheduledService {
-    @Scheduled(every = "10s", identity = "task-job")
+    @Scheduled(every = "30s", identity = "task-job")
     void schedule() {
         log.info("This is an scheduled task");
     }
