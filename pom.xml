@@ -8,6 +8,7 @@
   <packaging>pom</packaging>
   <modules>
     <module>quarkus-server</module>
+    <module>quarkus-kafka</module>
     <module>jmeter-sampler</module>
     <module>quarkus-server-nr</module>
   </modules>
@@ -25,6 +26,7 @@
     <jackson-databind.version>2.16.1</jackson-databind.version>
     <jmh.version>1.37</jmh.version>
     <jmeter.version>5.6.3</jmeter.version>
+    <scylla-driver.version>3.11.5.2</scylla-driver.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -59,6 +61,16 @@
         <groupId>com.xeridia</groupId>
         <artifactId>quarkus-model</artifactId>
         <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.scylladb</groupId>
+        <artifactId>scylla-driver-core</artifactId>
+        <version>${scylla-driver.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.scylladb</groupId>
+        <artifactId>scylla-driver-mapping</artifactId>
+        <version>${scylla-driver.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

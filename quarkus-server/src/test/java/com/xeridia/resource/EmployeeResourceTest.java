@@ -21,10 +21,7 @@ public class EmployeeResourceTest {
     void testPersistEndpoint() {
         String adminToken = ConfigProvider.getConfig().getValue("quarkus.test.admin.token", String.class);
 
-        Employee employeeToPersist = Employee.builder()
-                .name("Sergio")
-                .age(41)
-                .build();
+        Employee employeeToPersist = new Employee(null, "Sergio", 41);
 
         given()
                 .auth().oauth2(adminToken)
