@@ -13,12 +13,19 @@ public class ScyllaClusterConfig {
     @ConfigProperty(name = "scylla.db.contract-points")
     String contractPoints;
 
+    @ConfigProperty(name = "scylla.db.keyspace")
+    String keyspace;
+
     public Cluster buildCluster() {
         return Cluster.builder()
                 .withoutJMXReporting()
                 .withClusterName(clusterName)
                 .addContactPoint(contractPoints)
                 .build();
+    }
+
+    public String getKeyspace() {
+        return this.keyspace;
     }
 
 }

@@ -6,16 +6,17 @@ import com.datastax.driver.core.Session;
 import com.xeridia.config.ScyllaClusterConfig;
 import com.xeridia.model.Message;
 import jakarta.enterprise.context.ApplicationScoped;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 @ApplicationScoped
-public class MessageRepository {
+public class AlertRepository {
 
     private final Session session;
     private final PreparedStatement preparedStatement;
 
-    public MessageRepository(ScyllaClusterConfig scyllaClusterConfig) {
-        session = scyllaClusterConfig.buildCluster().connect("catalog");
-        preparedStatement = session.prepare("INSERT INTO message (id, product, price) VALUES (?, ?, ?)");
+    public AlertRepository(ScyllaClusterConfig scyllaClusterConfig) {
+        session = scyllaClusterConfig.buildCluster().connect(scyllaClusterConfig.getKeyspace());
+        preparedStatement = session.prepare("INSERT INTO alert (id, product, price) VALUES (?, ?, ?)");
     }
 
     public void save(Message message) {

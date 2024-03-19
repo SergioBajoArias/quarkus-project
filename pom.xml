@@ -8,9 +8,10 @@
   <packaging>pom</packaging>
   <modules>
     <module>quarkus-server</module>
-    <module>quarkus-kafka</module>
+    <module>quarkus-kafka-producer</module>
     <module>jmeter-sampler</module>
     <module>quarkus-server-nr</module>
+    <module>quarkus-kafka-consumer</module>
   </modules>
   <properties>
     <compiler-plugin.version>3.12.1</compiler-plugin.version>

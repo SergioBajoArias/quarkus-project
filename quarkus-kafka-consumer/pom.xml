@@ -9,7 +9,7 @@
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>quarkus-kafka</artifactId>
+    <artifactId>quarkus-kafka-consumer</artifactId>
 
     <dependencies>
         <dependency>
