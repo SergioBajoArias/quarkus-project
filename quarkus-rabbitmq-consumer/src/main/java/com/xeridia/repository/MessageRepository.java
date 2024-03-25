@@ -7,7 +7,6 @@ import com.datastax.driver.core.Session;
 import com.xeridia.config.ScyllaClusterConfig;
 import com.xeridia.model.Message;
 import jakarta.enterprise.context.ApplicationScoped;
-import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 @ApplicationScoped
 public class MessageRepository {

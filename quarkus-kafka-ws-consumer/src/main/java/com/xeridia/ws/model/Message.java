@@ -1,12 +1,11 @@
-package com.xeridia.model;
+package com.xeridia.ws.model;
 
 import io.quarkus.runtime.annotations.RegisterForReflection;
 
 import java.sql.Timestamp;
 
 @RegisterForReflection
-public class Message  {
-
+public class Message {
     Long id;
     String product;
     double price;

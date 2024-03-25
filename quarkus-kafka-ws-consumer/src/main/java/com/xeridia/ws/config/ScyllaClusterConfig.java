@@ -1,4 +1,4 @@
-package com.xeridia.config;
+package com.xeridia.ws.config;
 
 import com.datastax.driver.core.Cluster;
 import jakarta.enterprise.context.ApplicationScoped;

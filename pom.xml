@@ -12,6 +12,9 @@
     <module>jmeter-sampler</module>
     <module>quarkus-server-nr</module>
     <module>quarkus-kafka-consumer</module>
+      <module>quarkus-rabbitmq-producer</module>
+      <module>quarkus-rabbitmq-consumer</module>
+      <module>quarkus-kafka-ws-consumer</module>
   </modules>
   <properties>
     <compiler-plugin.version>3.12.1</compiler-plugin.version>

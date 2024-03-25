@@ -21,8 +21,8 @@
             <artifactId>quarkus-container-image-docker</artifactId>
         </dependency>
         <dependency>
-            <groupId>jakarta.persistence</groupId>
-            <artifactId>jakarta.persistence-api</artifactId>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-websockets</artifactId>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -35,16 +35,6 @@
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-smallrye-reactive-messaging-kafka</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.scylladb</groupId>
-            <artifactId>scylla-driver-core</artifactId>
-            <version>${scylla-driver.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.scylladb</groupId>
-            <artifactId>scylla-driver-mapping</artifactId>
-            <version>${scylla-driver.version}</version>
         </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>

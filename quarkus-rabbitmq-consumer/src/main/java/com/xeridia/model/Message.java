@@ -1,26 +1,31 @@
 package com.xeridia.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
 import java.util.UUID;
 
+@Entity
 public class Message {
-    Long id;
+    @Id
+    UUID uuid;
     String product;
     double price;
 
     public Message() {}
 
-    public Message(Long id, String product, double price) {
-        this.id = id;
+    public Message(UUID uuid, String product, double price) {
+        this.uuid = uuid;
         this.product = product;
         this.price = price;
     }
 
-    public Long getId() {
-        return id;
+    public UUID getUuid() {
+        return uuid;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
     }
 
     public String getProduct() {
