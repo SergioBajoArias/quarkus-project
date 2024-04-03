@@ -20,7 +20,7 @@ public class ReactiveClientSampler implements JavaSamplerClient {
     @Override
     public SampleResult runTest(JavaSamplerContext javaSamplerContext) {
         Client client = ClientBuilder.newClient();
-        WebTarget employeeService = client.target("http://localhost:8080/employees");
+        WebTarget employeeService = client.target("http://localhost:8081/messages/1");
 
         SampleResult sampleResult = new SampleResult();
         sampleResult.sampleStart();

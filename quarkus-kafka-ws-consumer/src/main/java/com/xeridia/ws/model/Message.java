@@ -2,28 +2,29 @@ package com.xeridia.ws.model;
 
 import io.quarkus.runtime.annotations.RegisterForReflection;
 
+import java.math.BigInteger;
 import java.sql.Timestamp;
 
 @RegisterForReflection
 public class Message {
-    Long id;
+    Integer id;
     String product;
     double price;
     Timestamp recordTime;
 
     public Message() {}
 
-    public Message(Long id, String product, double price) {
+    public Message(Integer id, String product, double price) {
         this.id = id;
         this.product = product;
         this.price = price;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

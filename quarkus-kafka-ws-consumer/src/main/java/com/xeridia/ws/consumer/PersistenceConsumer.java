@@ -47,9 +47,9 @@ public class PersistenceConsumer {
         }
 
         @OnMessage
-        void message(String msg) throws JsonProcessingException {
+        void message(String msg) throws JsonProcessingException, InterruptedException {
             log.info("Received message throw websocket: {}", msg);
-            // this.messageRepository.save(objectMapper.readValue(msg, Message.class));
+            this.messageRepository.save(objectMapper.readValue(msg, Message.class));
         }
 
     }
