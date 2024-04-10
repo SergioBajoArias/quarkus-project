@@ -26,7 +26,7 @@ public class PersistenceConsumer {
 
     public void consume(@Observes StartupEvent startupEvent) throws URISyntaxException, DeploymentException, IOException {
         log.info("Connecting to websocket....");
-        Session session = ContainerProvider.getWebSocketContainer().connectToServer(new Client(messageRepository), new URI("http://localhost:8080/messages/sergio"));
+        //Session session = ContainerProvider.getWebSocketContainer().connectToServer(new Client(messageRepository), new URI("http://localhost:8080/messages/sergio"));
     }
 
     @ClientEndpoint

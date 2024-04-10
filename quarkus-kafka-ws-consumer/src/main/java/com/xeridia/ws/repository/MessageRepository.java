@@ -7,7 +7,9 @@ import com.datastax.oss.driver.api.core.cql.BoundStatement;
 import com.datastax.oss.driver.api.core.cql.PreparedStatement;
 import com.datastax.oss.driver.api.core.cql.ResultSet;
 import com.datastax.oss.driver.api.core.cql.Row;
+import com.datastax.oss.driver.internal.core.session.throttling.ConcurrencyLimitingRequestThrottler;
 import com.xeridia.ws.model.Message;
+import io.quarkus.cache.CacheResult;
 import io.smallrye.mutiny.Uni;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.reactivestreams.FlowAdapters;
@@ -28,8 +30,15 @@ public class MessageRepository {
         cqlSession = CqlSession.builder()
                 .withConfigLoader(
                         DriverConfigLoader.programmaticBuilder()
+                                .withClass(DefaultDriverOption.REQUEST_THROTTLER_CLASS, ConcurrencyLimitingRequestThrottler.class)
+                                .withInt(DefaultDriverOption.REQUEST_THROTTLER_MAX_CONCURRENT_REQUESTS, 1000)
+                                .withInt(DefaultDriverOption.REQUEST_THROTTLER_MAX_QUEUE_SIZE, 100_000)
                                 .withDuration(DefaultDriverOption.REQUEST_TIMEOUT, Duration.ofSeconds(15))
                                 .build())
+                //.withLocalDatacenter("DC1")
+                //.addContactPoint(new InetSocketAddress("localhost", 9042))
+                //.addContactPoint(new InetSocketAddress("localhost", 9043))
+                //.addContactPoint(new InetSocketAddress("localhost", 9044))
                 .withKeyspace("catalog").build();
         insertPreparedStatement = cqlSession.prepare("INSERT INTO message (id, product, price) VALUES (:id, :product, :price)");
         selectPreparedStatement = cqlSession.prepare("SELECT * FROM message WHERE ID = :id");
@@ -45,6 +54,7 @@ public class MessageRepository {
         cqlSession.execute(bs);
     }
 
+    @CacheResult(cacheName = "message-cache")
     public Message findById(Integer id) {
         BoundStatement bs = selectPreparedStatement.bind().setInt("id", id);
 
@@ -65,6 +75,7 @@ public class MessageRepository {
                 .map(row -> row.getLong(0));
     }
 
+    @CacheResult(cacheName = "message-cache")
     public Uni<Message> findByIdReactive(Integer id) {
         BoundStatement bs = selectPreparedStatement.bind().setInt("id", id);
 

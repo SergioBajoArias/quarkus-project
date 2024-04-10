@@ -9,6 +9,7 @@ import org.apache.jmeter.protocol.java.sampler.JavaSamplerClient;
 import org.apache.jmeter.protocol.java.sampler.JavaSamplerContext;
 import org.apache.jmeter.samplers.SampleResult;
 
+import java.util.Random;
 import java.util.concurrent.ExecutionException;
 
 public class ReactiveClientSampler implements JavaSamplerClient {
@@ -19,8 +20,9 @@ public class ReactiveClientSampler implements JavaSamplerClient {
 
     @Override
     public SampleResult runTest(JavaSamplerContext javaSamplerContext) {
+        Random random = new Random();
         Client client = ClientBuilder.newClient();
-        WebTarget employeeService = client.target("http://localhost:8081/messages/1");
+        WebTarget employeeService = client.target("http://localhost:8081/messages/" + random.nextInt(999999) + "/route");
 
         SampleResult sampleResult = new SampleResult();
         sampleResult.sampleStart();

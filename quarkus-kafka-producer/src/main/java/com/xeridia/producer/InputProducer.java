@@ -6,6 +6,7 @@ import io.smallrye.reactive.messaging.annotations.Broadcast;
 import io.smallrye.reactive.messaging.kafka.Record;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.eclipse.microprofile.reactive.messaging.Channel;
 import org.eclipse.microprofile.reactive.messaging.Emitter;
 import org.eclipse.microprofile.reactive.messaging.OnOverflow;
@@ -44,7 +45,7 @@ public class InputProducer {
     public void sendProductToKafka() {
         for(long i = 0; i < NUMBER_OF_MESSAGES; i++) {
             Random random = new Random();
-            Message message = new Message(i, "product " + i, random.nextInt(150));
+            Message message = new Message(i, RandomStringUtils.random(2048, true, true), random.nextInt(150));
             emitter.send(Record.of(i, message));
         }
     }
