@@ -2,6 +2,7 @@ package com.xeridia.testresource;
 
 import io.quarkus.test.common.QuarkusTestResourceLifecycleManager;
 import io.restassured.RestAssured;
+import org.keycloak.representations.AccessTokenResponse;
 // import org.keycloak.representations.AccessTokenResponse;
 
 import java.util.Map;
@@ -27,7 +28,7 @@ public class KeycloakXTestResourceLifecycleManager implements QuarkusTestResourc
     }
 
     public static String getAccessToken(String userName, String password) {
-        /*return RestAssured.given()
+        return RestAssured.given()
                 .contentType("application/x-www-form-urlencoded")
                 .formParam("client_id", KEYCLOAK_SERVICE_CLIENT)
                 .formParam("client_secret", "secret")
@@ -36,7 +37,6 @@ public class KeycloakXTestResourceLifecycleManager implements QuarkusTestResourc
                 .formParam("grant_type", "password")
                 .when()
                 .post(KEYCLOAK_SERVER_URL + "/realms/" + KEYCLOAK_REALM + "/protocol/openid-connect/token")
-                .as(AccessTokenResponse.class).getToken();*/
-        return null;
+                .as(AccessTokenResponse.class).getToken();
     }
 }
