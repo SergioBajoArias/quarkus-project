@@ -4,12 +4,13 @@ import com.xeridia.model.Employee;
 import com.xeridia.service.EmployeeService;
 import io.quarkus.vertx.web.ReactiveRoutes;
 import io.quarkus.vertx.web.Route;
+import io.quarkus.vertx.web.RouteBase;
 import io.smallrye.mutiny.Uni;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.ws.rs.Path;
 
 import java.util.List;
 
+@RouteBase(path = "/api/admin/route/employees", produces = ReactiveRoutes.APPLICATION_JSON)
 @ApplicationScoped
 public class EmployeeRoute {
 
@@ -19,7 +20,7 @@ public class EmployeeRoute {
         this.employeeService = employeeService;
     }
 
-    @Route(methods = Route.HttpMethod.GET, path = "/api/admin/route/employees", produces = ReactiveRoutes.APPLICATION_JSON)
+    @Route(methods = Route.HttpMethod.GET, path = "")
     public Uni<List<Employee>> listAll() {
         return employeeService.listAll();
     }
