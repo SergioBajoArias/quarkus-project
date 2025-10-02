@@ -1,5 +1,6 @@
 package com.xeridia.resource;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.quarkus.security.identity.SecurityIdentity;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
@@ -20,6 +21,7 @@ public class UsersResource {
     }
 
     @Getter
+    @JsonIgnoreProperties
     public static class User {
         private final String userName;
         User(SecurityIdentity identity) {
